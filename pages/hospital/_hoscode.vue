@@ -104,6 +104,7 @@ import '~/assets/css/hospital.css'
 import cookie from "js-cookie";
 import hosp from '@/api/hosp'
 import Vue from 'vue'
+import userInfo from "@/api/userInfo";
 
 export default {
   data() {
@@ -131,6 +132,15 @@ export default {
         loginEvnet.$emit('loginDialogEvent')
         return
       }
+      //判断认证
+      userInfo.getUserInfo().then(response=>{
+       let authStatus=response.data.authStatus
+        //状态为2 认证通过
+        if (!authStatus || authStatus !=2){
+            window.location.href='/user'
+          return
+        }
+      })
       window.location.href = '/hospital/schedule?hoscode=' + this.hospital.hoscode + "&depcode=" + depcode
     },
 
