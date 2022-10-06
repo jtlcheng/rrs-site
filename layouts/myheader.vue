@@ -427,7 +427,7 @@ export default {
           scope: response.data.scope, // 网页默认即可
           redirect_uri: response.data.redirect_uri, // 授权成功后回调的url
           state: response.data.state, // 可设置为简单的随机数加session用来校验
-          style: 'black', // 提供"black"、"white"可选。二维码的样式
+          style: 'white', // 提供"black"、"white"可选。二维码的样式
           href: '' // 外部css文件url，需要https
         })
       })
