@@ -120,14 +120,6 @@
               <div class="point"></div>
               <span class="notice v-link clickable dark">关于郴州市新冠疫情通知 </span>
             </div>
-            <!--            <div class="notice-wrapper">
-                          <div class="point"></div>
-                          <span class="notice v-link clickable dark">北京中医药大学东方医院部分科室医生门诊医 </span>
-                        </div>
-                        <div class="notice-wrapper">
-                          <div class="point"></div>
-                          <span class="notice v-link clickable dark"> 武警总医院号源暂停更新通知 </span>
-                        </div>-->
           </div>
         </div>
         <div class="suspend-notice-list space">
@@ -180,6 +172,7 @@ export default {
   },
   data() {
     return {
+      hoscode: null,
       searchObj: {},
       page: 1,
       limit: 10,
@@ -189,7 +182,9 @@ export default {
       districtList: [], //地区集合
 
       hostypeActiveIndex: 0,
-      provinceActiveIndex: 0
+      provinceActiveIndex: 0,
+
+      departmentVoList: []
 
     }
   },
@@ -220,6 +215,14 @@ export default {
             this.districtList.push(response.data[i])
           }
         })
+      hosp.findDepartment(this.hoscode).then(response=>{
+        console.log(response)
+        this.departmentVoList=response.data
+      })
+    },
+    move(index, depcode) {
+      this.activeIndex = index
+      document.getElementById(depcode).scrollIntoView();
     },
     //查询医院列表
     getList() {
@@ -260,6 +263,7 @@ export default {
         cb(response.data)
       })
     },
+
 
     //在下拉框选择某一个内容，执行下面方法，跳转到详情页面中
     handleSelect(item) {

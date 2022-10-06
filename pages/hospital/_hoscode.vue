@@ -151,8 +151,8 @@ export default {
 
 
       })
-
       hosp.findDepartment(this.hoscode).then(response => {
+        console.log(response)
         this.departmentVoList = response.data
       })
     },
